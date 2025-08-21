@@ -7,6 +7,7 @@ This is a Streamlit-based expense tracking application that leverages AI feature
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+UI Preference: Enhanced visual styling with modern design elements, gradient backgrounds, and better user experience.
 
 ## System Architecture
 
