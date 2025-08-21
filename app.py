@@ -19,110 +19,219 @@ def main():
         page_title="AI Expense Tracker",
         page_icon="💰",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="collapsed"
     )
     
-    # Custom CSS for better styling
+    # Dark blue animated theme CSS
     st.markdown("""
     <style>
+    /* Global Styling */
+    .stApp {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+    }
+    
     .main-header {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+        padding: 3rem;
+        border-radius: 20px;
         color: white;
         text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: fadeInDown 1s ease-out;
+    }
+    
+    .nav-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 20px;
+        margin: 2rem 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    .nav-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 1rem;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .nav-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+    }
+    
+    .nav-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        animation: pulse 2s infinite;
+    }
+    
+    .nav-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+    
+    .nav-description {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
     }
     
     .metric-card {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-left: 4px solid #667eea;
-        margin-bottom: 1rem;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 1.5rem;
+        animation: slideInUp 0.8s ease-out;
     }
     
     .success-box {
-        background: linear-gradient(90deg, #56ab2f 0%, #a8e6cf 100%);
-        padding: 1rem;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
         color: white;
-        margin: 1rem 0;
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        animation: slideInRight 0.8s ease-out;
     }
     
     .warning-box {
-        background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
-        padding: 1rem;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
         color: white;
-        margin: 1rem 0;
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 0.8s ease-out;
     }
     
     .info-box {
-        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-        padding: 1rem;
-        border-radius: 8px;
-        color: white;
-        margin: 1rem 0;
-    }
-    
-    .sidebar .sidebar-content {
-        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .stSelectbox > div > div {
-        background: white;
-        border-radius: 8px;
-    }
-    
-    .expense-card {
-        background: white;
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1rem;
-        border-left: 4px solid #667eea;
+        border-radius: 15px;
+        color: white;
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        animation: slideInUp 0.8s ease-out;
     }
     
-    .nav-link {
-        padding: 0.5rem 1rem;
-        margin: 0.25rem 0;
-        border-radius: 8px;
-        transition: all 0.3s;
-    }
-    
-    .nav-link:hover {
-        background: rgba(255, 255, 255, 0.1);
+    .content-panel {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(10px);
+        padding: 3rem;
+        border-radius: 20px;
+        margin: 2rem 0;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: fadeIn 1s ease-out;
     }
     
     .stButton > button {
-        border-radius: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
         border: none;
+        border-radius: 12px;
+        padding: 1rem 2rem;
         font-weight: 600;
-        transition: all 0.3s;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     }
     
     .stSelectbox > div > div {
-        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
     
-    .stTextInput > div > div > input {
-        border-radius: 8px;
-    }
-    
-    .stNumberInput > div > div > input {
-        border-radius: 8px;
-    }
-    
+    .stTextInput > div > div > input,
+    .stNumberInput > div > div > input,
     .stTextArea > div > div > textarea {
-        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+    
+    .stTextInput > div > div > input::placeholder,
+    .stTextArea > div > div > textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Override Streamlit defaults */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
+        color: white;
+    }
+    
+    .stDataFrame {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -131,37 +240,113 @@ def main():
     st.markdown("""
     <div class="main-header">
         <h1>💰 AI-Powered Expense Tracker</h1>
-        <p>Smart financial management with AI insights and predictions</p>
+        <p>Smart financial management with AI insights and predictions in Indian Rupees (₹)</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Enhanced sidebar for navigation
-    with st.sidebar:
-        st.markdown("### 🧭 Navigation")
-        page = st.selectbox(
-            "Choose a page:",
-            ["📊 Dashboard", "➕ Add Expense", "📝 Manage Expenses", "🤖 AI Insights", "🗣️ Natural Language Query"],
-            format_func=lambda x: x
-        )
+    # Check if a specific page is selected
+    if 'selected_page' not in st.session_state:
+        st.session_state.selected_page = None
+    
+    # Show navigation or specific page
+    if st.session_state.selected_page is None:
+        show_navigation()
+    else:
+        show_page_content(st.session_state.selected_page)
+
+def show_navigation():
+    """Display the main navigation page with all available options"""
+    st.markdown("""
+    <div class="nav-container">
+        <h2 style="text-align: center; color: white; margin-bottom: 2rem;">Choose Your Action</h2>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Create navigation cards
+    col1, col2, col3 = st.columns(3, gap="large")
+    
+    with col1:
+        st.markdown("""
+        <div class="nav-card">
+            <div class="nav-icon">📊</div>
+            <div class="nav-title">Dashboard</div>
+            <div class="nav-description">View your financial overview, charts, and recent transactions</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("📊 Go to Dashboard", key="dashboard_nav", use_container_width=True):
+            st.session_state.selected_page = "Dashboard"
+            st.rerun()
         
-        st.markdown("---")
-        st.markdown("### 💡 Quick Tips")
-        st.info("💡 Use descriptive expense names for better AI categorization!")
-        st.info("🔍 Try natural language queries like 'How much did I spend on food this month?'")
+        st.markdown("""
+        <div class="nav-card">
+            <div class="nav-icon">🤖</div>
+            <div class="nav-title">AI Insights</div>
+            <div class="nav-description">Get smart predictions and spending pattern analysis</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("🤖 Go to AI Insights", key="insights_nav", use_container_width=True):
+            st.session_state.selected_page = "AI Insights"
+            st.rerun()
     
-    # Remove the icon from page name for processing
-    page_clean = page.split(" ", 1)[1] if " " in page else page
+    with col2:
+        st.markdown("""
+        <div class="nav-card">
+            <div class="nav-icon">➕</div>
+            <div class="nav-title">Add Expense</div>
+            <div class="nav-description">Add new expenses with AI-powered categorization</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("➕ Add New Expense", key="add_nav", use_container_width=True):
+            st.session_state.selected_page = "Add Expense"
+            st.rerun()
+        
+        st.markdown("""
+        <div class="nav-card">
+            <div class="nav-icon">🗣️</div>
+            <div class="nav-title">Natural Language Query</div>
+            <div class="nav-description">Ask questions about your expenses in plain English</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("🗣️ Ask Questions", key="query_nav", use_container_width=True):
+            st.session_state.selected_page = "Natural Language Query"
+            st.rerun()
     
-    if page_clean == "Dashboard":
+    with col3:
+        st.markdown("""
+        <div class="nav-card">
+            <div class="nav-icon">📝</div>
+            <div class="nav-title">Manage Expenses</div>
+            <div class="nav-description">Edit, delete, and filter your existing expenses</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("📝 Manage Expenses", key="manage_nav", use_container_width=True):
+            st.session_state.selected_page = "Manage Expenses"
+            st.rerun()
+
+def show_page_content(page_name):
+    """Display the content for the selected page"""
+    # Back to navigation button
+    col1, col2, col3 = st.columns([1, 8, 1])
+    with col1:
+        if st.button("🏠 Home", type="secondary"):
+            st.session_state.selected_page = None
+            st.rerun()
+    
+    # Content panel
+    st.markdown('<div class="content-panel">', unsafe_allow_html=True)
+    
+    if page_name == "Dashboard":
         show_dashboard()
-    elif page_clean == "Add Expense":
+    elif page_name == "Add Expense":
         show_add_expense()
-    elif page_clean == "Manage Expenses":
+    elif page_name == "Manage Expenses":
         show_manage_expenses()
-    elif page_clean == "AI Insights":
+    elif page_name == "AI Insights":
         show_ai_insights()
-    elif page_clean == "Natural Language Query":
+    elif page_name == "Natural Language Query":
         show_nl_query()
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 
 def show_dashboard():
     # Get all expenses
@@ -235,10 +420,14 @@ def show_dashboard():
                         title="💳 Spending Distribution by Category",
                         color_discrete_sequence=px.colors.qualitative.Set3)
         fig_pie.update_layout(
-            font=dict(size=12),
+            font=dict(size=12, color='white'),
             title_font_size=16,
+            title_font_color='white',
             showlegend=True,
-            height=400
+            height=400,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            legend=dict(font=dict(color='white'))
         )
         st.plotly_chart(fig_pie, use_container_width=True)
     
@@ -258,11 +447,16 @@ def show_dashboard():
         )
         fig_line.update_layout(
             xaxis_title="Month", 
-            yaxis_title="Amount ($)",
-            font=dict(size=12),
+            yaxis_title="Amount (₹)",
+            font=dict(size=12, color='white'),
             title_font_size=16,
+            title_font_color='white',
             height=400,
-            hovermode='x unified'
+            hovermode='x unified',
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            xaxis=dict(color='white', gridcolor='rgba(255,255,255,0.2)'),
+            yaxis=dict(color='white', gridcolor='rgba(255,255,255,0.2)')
         )
         st.plotly_chart(fig_line, use_container_width=True)
     
@@ -301,15 +495,15 @@ def show_add_expense():
                 st.markdown("**💭 Expense Details**")
                 description = st.text_input(
                     "Description*", 
-                    placeholder="e.g., Lunch at McDonald's, Gas for car, Netflix subscription",
+                    placeholder="e.g., Lunch at McDonald's, Petrol for car, Netflix subscription",
                     help="Be descriptive! AI will categorize based on your description."
                 )
                 amount = st.number_input(
-                    "Amount*", 
+                    "Amount (₹)*", 
                     min_value=0.01, 
                     format="%.2f", 
                     step=0.01,
-                    help="Enter the expense amount"
+                    help="Enter the expense amount in Indian Rupees"
                 )
             
             with col2:

@@ -297,7 +297,7 @@ class ExpenseAI:
                 
                 return {
                     'amount': total_amount,
-                    'details': f"Total spending{category_text}{period_text}: ${total_amount:.2f}",
+                    'details': f"Total spending{category_text}{period_text}: ₹{total_amount:.2f}",
                     'data': filtered_df[['date', 'description', 'amount', 'category']].head(10)
                 }
             
@@ -308,7 +308,7 @@ class ExpenseAI:
                 
                 return {
                     'amount': avg_amount,
-                    'details': f"Average spending{category_text}{period_text}: ${avg_amount:.2f}",
+                    'details': f"Average spending{category_text}{period_text}: ₹{avg_amount:.2f}",
                     'data': filtered_df[['date', 'description', 'amount', 'category']].head(10)
                 }
             
@@ -317,7 +317,7 @@ class ExpenseAI:
                     max_expense = filtered_df.loc[filtered_df['amount'].idxmax()]
                     return {
                         'amount': max_expense['amount'],
-                        'details': f"Highest expense: {max_expense['description']} - ${max_expense['amount']:.2f} on {max_expense['date'].strftime('%Y-%m-%d')}",
+                        'details': f"Highest expense: {max_expense['description']} - ₹{max_expense['amount']:.2f} on {max_expense['date'].strftime('%Y-%m-%d')}",
                         'data': filtered_df.nlargest(5, 'amount')[['date', 'description', 'amount', 'category']]
                     }
             
@@ -326,7 +326,7 @@ class ExpenseAI:
                     min_expense = filtered_df.loc[filtered_df['amount'].idxmin()]
                     return {
                         'amount': min_expense['amount'],
-                        'details': f"Lowest expense: {min_expense['description']} - ${min_expense['amount']:.2f} on {min_expense['date'].strftime('%Y-%m-%d')}",
+                        'details': f"Lowest expense: {min_expense['description']} - ₹{min_expense['amount']:.2f} on {min_expense['date'].strftime('%Y-%m-%d')}",
                         'data': filtered_df.nsmallest(5, 'amount')[['date', 'description', 'amount', 'category']]
                     }
             
@@ -335,7 +335,7 @@ class ExpenseAI:
                 if not filtered_df.empty:
                     return {
                         'amount': filtered_df['amount'].sum(),
-                        'details': f"Found {len(filtered_df)} expenses totaling ${filtered_df['amount'].sum():.2f}",
+                        'details': f"Found {len(filtered_df)} expenses totaling ₹{filtered_df['amount'].sum():.2f}",
                         'data': filtered_df[['date', 'description', 'amount', 'category']].head(10)
                     }
             

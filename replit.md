@@ -7,7 +7,7 @@ This is a Streamlit-based expense tracking application that leverages AI feature
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-UI Preference: Enhanced visual styling with modern design elements, gradient backgrounds, and better user experience.
+UI Preference: Dark blue animated theme with center-based navigation, removed sidebar, large panels, glass-morphism effects, smooth animations, and Indian Rupee (₹) currency display.
 
 ## System Architecture
 

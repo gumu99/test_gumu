@@ -3,7 +3,7 @@ from datetime import datetime
 
 def format_currency(amount):
     """
-    Format a number as currency with proper formatting.
+    Format a number as currency with proper formatting in Indian Rupees.
     
     Args:
         amount (float): The amount to format
@@ -12,9 +12,9 @@ def format_currency(amount):
         str: Formatted currency string
     """
     if amount is None:
-        return "$0.00"
+        return "₹0.00"
     
-    return f"${amount:,.2f}"
+    return f"₹{amount:,.2f}"
 
 def validate_expense_input(description, amount):
     """
